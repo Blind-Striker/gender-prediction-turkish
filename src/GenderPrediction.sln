@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.102
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FD3AE64E-7BA0-4AF4-BA8E-E3C515C6C053}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox", "Tests\Sandbox\Sandbox.csproj", "{A6454B1D-25C6-4F34-B31B-A964B43C6605}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenderPrediction.Turkish", "GenderPrediction.Turkish\GenderPrediction.Turkish.csproj", "{1834D603-BAD0-4D36-B4CD-E072CE8C436C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenderPrediction.Trainer", "GenderPrediction.Trainer\GenderPrediction.Trainer.csproj", "{51EFBB46-679C-49C8-8CF4-A543F020F13E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A6454B1D-25C6-4F34-B31B-A964B43C6605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6454B1D-25C6-4F34-B31B-A964B43C6605}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6454B1D-25C6-4F34-B31B-A964B43C6605}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6454B1D-25C6-4F34-B31B-A964B43C6605}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1834D603-BAD0-4D36-B4CD-E072CE8C436C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1834D603-BAD0-4D36-B4CD-E072CE8C436C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1834D603-BAD0-4D36-B4CD-E072CE8C436C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1834D603-BAD0-4D36-B4CD-E072CE8C436C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51EFBB46-679C-49C8-8CF4-A543F020F13E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51EFBB46-679C-49C8-8CF4-A543F020F13E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51EFBB46-679C-49C8-8CF4-A543F020F13E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51EFBB46-679C-49C8-8CF4-A543F020F13E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A6454B1D-25C6-4F34-B31B-A964B43C6605} = {FD3AE64E-7BA0-4AF4-BA8E-E3C515C6C053}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {43A30CFB-848B-415D-95A6-8A8057BD2500}
+	EndGlobalSection
+EndGlobal
