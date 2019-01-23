@@ -1,73 +1,120 @@
 ﻿using System;
-using System.IO;
+using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using ConsoleTableExt;
 using GenderPrediction.Train;
 using GenderPrediction.Turkish;
-using GenderPrediction.Turkish.Model;
-using Microsoft.ML;
-using Microsoft.ML.Core.Data;
+using GenderPrediction.Turkish.Contracts;
+using GenderPrediction.Turkish.Models;
 
 namespace Sandbox
 {
     public class Program
     {
-        private const string TrainingDataFile = "./turkish-names-sample-data.csv";
-        private const string TestDataFile = "./turkish-names-test.csv";
-        private const string ModelPath = "./Model.zip";
-
-        public static async Task Main(string[] args)
+        public static void Main()
         {
-            var mlContext = new MLContext();
+            IGenderPredictionService genderPredictionService = new GenderPredictionService();
+            var genderPredictionModels = genderPredictionService.Predict(GetRandomSample(Names.NameGender, 250).Select(pair => pair.Key).ToArray());
 
-            //TextLoader textReader = mlContext.Data.CreateTextReader<GenderClassificationData>(false, ',');
-            //IDataView trainingDataView = textReader.Read(TrainingDataFile);
-
-            //var estimatorChain = mlContext.Transforms.Text.FeaturizeText("Name", "Features")
-            //    .Append(mlContext.Transforms.Conversion.MapValueToKey("Label"))
-            //    .Append(mlContext.MulticlassClassification.Trainers.StochasticDualCoordinateAscent())
-            //    //.Append(mlContext.Transforms.Conversion.MapKeyToValue(("PredictedLabel", "Data")));
-            //    .Append(mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
-
-            //var model = estimatorChain.Fit(trainingDataView);
-
-            //var predictionEngine = model.CreatePredictionEngine<GenderClassificationData, GenderPredictionResult>(mlContext);
-
-            //using (var fs = File.Create(ModelPath))
-            //{
-            //    mlContext.Model.Save(model, fs);
-            //}
-
-            ITransformer model;
-            using (var stream = new FileStream(ModelPath, FileMode.Open, FileAccess.Read, FileShare.Read))
-            {
-                model = mlContext.Model.Load(stream);
-            }
-
-            var predictionEngine = model.CreatePredictionEngine<GenderClassificationData, GenderPredictionResult>(mlContext);
-
-            var classificationDatas = Names.FirstNames.Take(100).Select(s => new GenderClassificationData() { Name = s.ToUpperInvariant() });
-
-            foreach (var genderClassificationData in classificationDatas)
-            {
-                var genderPrediction = predictionEngine.Predict(genderClassificationData);
-                string predictedGender = genderPrediction.Class == "1" ? "Erkek" : "Kadın";
-
-                Console.WriteLine($"{genderClassificationData.Name} Predicted Gender {predictedGender}");
-
-                for (int i = 0; i < genderPrediction.Score.Length; i++)
+            var tableRows = genderPredictionModels
+                .OrderByDescending(model => model.UnisexProbability)
+                .Select(genderPredictionModel => new TableRow
                 {
-                    string scoreClassName = i == 0 ? "Erkek" : "Kadın";
+                    Name = genderPredictionModel.Name,
+                    PredictedGender = GetShortenedGender(genderPredictionModel.PredictedGender),
+                    TestDataGender = GetShortenedGender(Names.NameGender[genderPredictionModel.Name]),
+                    ScoreMale = (genderPredictionModel.Score.First(pair => pair.Key == Gender.Male).Value * 100).ToString("00.##"),
+                    ScoreFemale = (genderPredictionModel.Score.First(pair => pair.Key == Gender.Female).Value * 100).ToString("00.##"),
+                    UnisexProbability = genderPredictionModel.UnisexProbability
+                })
+                .ToList();
 
-                    Console.Write($"({scoreClassName})={genderPrediction.Score[i]}");
-                }
-                Console.WriteLine();
+            ConsoleTableBuilder
+                .From(tableRows)
+                .WithColumn("Name", "P.Gender", "T.Gender", "Score Male", "Score Female", "U.Probability")
+                .WithFormat(ConsoleTableBuilderFormat.MarkDown)
+                .ExportAndWriteLine();
+        }
+
+        private class TableRow
+        {
+            public string Name { get; set; }
+
+            public string PredictedGender { get; set; }
+
+            public string TestDataGender { get; set; }
+
+            public string ScoreMale { get; set; }
+
+            public string ScoreFemale { get; set; }
+
+            public float UnisexProbability { get; set; }
+        } 
+
+        private static string GetShortenedGender(Gender gender)
+        {
+            switch (gender)
+            {
+                case Gender.Male:
+                    return "Male";
+                case Gender.Female:
+                    return "Female";
+                case Gender.Unisex:
+                    return "Unisex";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(gender), gender, null);
             }
         }
 
-        internal static async Task TrainAsync(string trainingDataFile, string modelPath)
+        private static string GetShortenedGender(string gender)
         {
+            switch (gender)
+            {
+                case "E":
+                    return "Male";
+                case "K":
+                    return "Female";
+                case "U":
+                    return "Unisex";
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(gender), gender, null);
+            }
+        }
 
+        private static IDictionary<TKey, TValue> GetRandomSample<TKey, TValue>(IDictionary<TKey, TValue> list, int sampleSize)
+        {
+            if (list == null)
+            {
+                throw new ArgumentNullException(nameof(list));
+            }
+
+            if (sampleSize > list.Count)
+            {
+                throw new ArgumentException("sampleSize may not be greater than list count", nameof(sampleSize));
+            }
+
+            var indices = new Dictionary<int, int>();
+            var rnd = new Random();
+
+            IDictionary<TKey, TValue> newDic = new Dictionary<TKey, TValue>(); 
+
+            for (var i = 0; i < sampleSize; i++)
+            {
+                var j = rnd.Next(i, list.Count);
+                if (!indices.TryGetValue(j, out var index))
+                {
+                    index = j;
+                }
+
+                newDic.Add(list.ElementAt(index));
+
+                if (!indices.TryGetValue(i, out index)) index = i;
+                {
+                    indices[j] = index;
+                }
+            }
+
+            return newDic;
         }
     }
 }

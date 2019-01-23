@@ -1,6 +1,6 @@
 ﻿using Microsoft.ML.Data;
 
-namespace GenderPrediction.Turkish.Model
+namespace GenderPrediction.Turkish.Models
 {
     public class GenderClassificationData
     {

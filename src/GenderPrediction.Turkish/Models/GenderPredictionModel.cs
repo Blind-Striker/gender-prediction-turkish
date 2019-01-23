@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Collections.Immutable;
 
-namespace GenderPrediction.Turkish.Model
+namespace GenderPrediction.Turkish.Models
 {
     public class GenderPredictionModel
     {
