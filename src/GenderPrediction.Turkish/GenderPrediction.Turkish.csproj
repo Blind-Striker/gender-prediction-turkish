@@ -4,6 +4,17 @@
     <TargetFrameworks>net461;netstandard2.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
 
+    <Title>Turkish Names Gender Prediction</Title>
+    <Authors>Deniz İrgin</Authors>
+    <Description>
+      GenderPrediction.Turkish is a library that provides prediction of gender from Turkish names built on ML.NET Both training 
+    </Description>
+    <PackageProjectUrl>https://github.com/Blind-Striker/gender-prediction-turkish</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/Blind-Striker/gender-prediction-turkish/blob/master/LICENSE</PackageLicenseUrl>
+    <PackageIconUrl>https://github.com/Blind-Striker/gender-prediction-turkish/tree/master/assets/gender_prediction.png</PackageIconUrl>
+    <PackageTags>machine learning, turkish name, gender prediction, ML.NET, ML</PackageTags>
+    <Version>1.0.0</Version>
+
     <!-- When compiling .NET SDK 2.0 projects targeting .NET 4.x on Mono using 'dotnet build' you -->
     <!-- have to teach MSBuild where the Mono copy of the reference asssemblies is -->
     <TargetIsMono Condition="$(TargetFramework.StartsWith('net4')) and '$(OS)' == 'Unix'">true</TargetIsMono>

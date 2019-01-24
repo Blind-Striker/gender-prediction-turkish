@@ -15,8 +15,8 @@ Both training application and library included in source code.
 
 | Build server                | Platform      | Build status                                                                                                                                                        | Integration tests                                                                                                                                                   |
 |-----------------------------|---------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| AppVeyor                    | Windows       | [![Build status](https://ci.appveyor.com/api/projects/status/ogciqii9ek7na1oa?svg=true)](https://ci.appveyor.com/project/Blind-Striker/clash-royale-client-dotnet)            | |
-| Travis                      | Linux / MacOS | [![Build Status](https://travis-ci.org/Blind-Striker/clash-royale-client-dotnet.svg?branch=master)](https://travis-ci.org/Blind-Striker/clash-royale-client-dotnet)  | |
+| AppVeyor                    | Windows       | [![Build status](https://ci.appveyor.com/api/projects/status/xxcqx220o71bnghq?svg=true)](https://ci.appveyor.com/project/Blind-Striker/gender-prediction-turkish)           | |
+| Travis                      | Linux / MacOS | [![Build Status](https://travis-ci.com/Blind-Striker/gender-prediction-turkish.svg?token=Vj8PGFoMvzHtyPjfWb4P&branch=master)](https://travis-ci.com/Blind-Striker/gender-prediction-turkish)  | |
 
 
 ## Table of Contents
