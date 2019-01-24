@@ -55,6 +55,8 @@ Task("tests")
         {
            string testProjectPath = testProj.CsProjPath;
 
+           Warning($"Target Frameworks {string.Join(" ",testProj.TargetFrameworks)}");
+
            foreach(string targetFramework in testProj.TargetFrameworks)
            {
                 Warning($"Running {targetFramework.ToUpper()} tests for {testProj.AssemblyName}");
