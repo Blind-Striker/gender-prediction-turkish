@@ -13,7 +13,7 @@ namespace Sandbox
     {
         public static void Main()
         {
-            IGenderPredictionService genderPredictionService = new GenderPredictionService();
+            IGenderPredictionService genderPredictionService = GenderPredictionStandalone.Create();
             var genderPredictionModels = genderPredictionService.Predict(GetRandomSample(Names.NameGender, 250).Select(pair => pair.Key).ToArray());
 
             var tableRows = genderPredictionModels

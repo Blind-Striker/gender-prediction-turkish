@@ -1,33 +1,30 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Text;
 using GenderPrediction.Turkish.Contracts;
 using GenderPrediction.Turkish.Models;
-using GenderPrediction.Turkish.Properties;
-using Microsoft.ML;
-using Microsoft.ML.Core.Data;
 
 namespace GenderPrediction.Turkish
 {
     public class GenderPredictionService : IGenderPredictionService
     {
-        private readonly PredictionEngine<GenderClassificationData, GenderPredictionResult> _predictionEngine;
+        private readonly IGenderPredictionEngine _predictionEngine;
 
-        public GenderPredictionService()
+        public GenderPredictionService(IGenderPredictionEngine predictionEngine)
         {
-            using (Stream stream = new MemoryStream(Resources.logistic_regression_model))
-            {
-                var mlContext = new MLContext();
-                ITransformer model = mlContext.Model.Load(stream);
-                _predictionEngine = model.CreatePredictionEngine<GenderClassificationData, GenderPredictionResult>(mlContext);
-            }            
+            _predictionEngine = predictionEngine;
         }
 
         public GenderPredictionModel Predict(string name)
         {
-            var formattedName = string.Join("",
+            if (string.IsNullOrEmpty(name))
+            {
+                throw new ArgumentNullException(nameof(name));
+            }
+
+            var formattedName = string.Join(string.Empty,
                     name.Trim().Normalize(NormalizationForm.FormD).Where(c => char.GetUnicodeCategory(c) != UnicodeCategory.NonSpacingMark))
                 .Replace("ı", "i")
                 .ToUpperInvariant();
@@ -45,6 +42,11 @@ namespace GenderPrediction.Turkish
 
         public IEnumerable<GenderPredictionModel> Predict(IEnumerable<string> names)
         {
+            if (names == null)
+            {
+                throw new ArgumentNullException(nameof(names));
+            }
+
             foreach (var name in names)
             {
                 yield return Predict(name);

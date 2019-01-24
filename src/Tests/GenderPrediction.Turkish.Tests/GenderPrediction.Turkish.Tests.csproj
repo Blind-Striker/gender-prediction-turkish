@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net461;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net461;netcoreapp2.2;netcoreapp2.1;netcoreapp2.0</TargetFrameworks>
     <LangVersion>latest</LangVersion>
 
     <!-- When compiling .NET SDK 2.0 projects targeting .NET 4.x on Mono using 'dotnet build' you -->
@@ -33,10 +33,31 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="TrainedModel\logistic-regression-model.zip" />
+    <!-- When using 'dotnet build' to compile against Mono reference assemblies it seems necessary to add some explicit references to some facade DLLs  -->
+    <Reference Include="System.Runtime" Condition="'$(BaseFrameworkPathOverrideForMono)' != '' AND $(TargetFramework.StartsWith('net4'))" />
+    <Reference Include="System.IO" Condition="'$(BaseFrameworkPathOverrideForMono)' != '' AND $(TargetFramework.StartsWith('net4'))" />
+    <Reference Include="System.Net.Primitives" Condition="'$(BaseFrameworkPathOverrideForMono)' != '' AND $(TargetFramework.StartsWith('net4'))" />
+    <Reference Include="System.Threading.Tasks" Condition="'$(BaseFrameworkPathOverrideForMono)' != '' AND $(TargetFramework.StartsWith('net4'))" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Appveyor.TestLogger" Version="2.0.0" />
     <PackageReference Include="Microsoft.ML" Version="0.9.0" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
+    <PackageReference Include="Moq" Version="4.10.1" />
+    <PackageReference Include="xunit" Version="2.4.1" />
+    <PackageReference Include="xunit.abstractions" Version="2.0.3" />
+    <PackageReference Include="xunit.runner.console" Version="2.4.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.4.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\GenderPrediction.Turkish\GenderPrediction.Turkish.csproj" />
   </ItemGroup>
 </Project>

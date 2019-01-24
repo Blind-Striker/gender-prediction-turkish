@@ -331,6 +331,8 @@ ASALocalRun/
 # Local History for Visual Studio
 .localhistory/
 
+testrunner
+
 # Cake
 [Tt]ools/
 
