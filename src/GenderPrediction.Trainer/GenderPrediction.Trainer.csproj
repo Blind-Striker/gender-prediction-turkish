@@ -21,17 +21,16 @@
 
     <!-- Add the Facades directory.  Not sure how else to do this. Necessary at least for .NET 4.5 -->
     <AssemblySearchPaths Condition="'$(BaseFrameworkPathOverrideForMono)' != ''">$(FrameworkPathOverride)/Facades;$(AssemblySearchPaths)</AssemblySearchPaths>
+
+    <NuGetPackageFolderPath>$(NuGetPackageFolders.Split(';')[0])</NuGetPackageFolderPath>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='net461'">
-    <PlatformTarget>x64</PlatformTarget>
-    <RuntimeIdentifier Condition="'$(OS)' == 'Windows_NT'">win-x64</RuntimeIdentifier>
-    <RuntimeIdentifier Condition="'$(OS)' == 'Unix'">linux-x64</RuntimeIdentifier>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)'!='net461'">
-    <PlatformTarget>x64</PlatformTarget>
-  </PropertyGroup>
+  <ItemGroup>
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(NuGetPackageFolderPath)/microsoft.ml.cpumath/0.9.0/runtimes/linux-x64/native/libCpuMathNative.so" Link="runtimes/linux-x64/native/libCpuMathNative.so" Pack="true" PackagePath="runtimes/linux-x64/native/libCpuMathNative.so" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(NuGetPackageFolderPath)/microsoft.ml.cpumath/0.9.0/runtimes/osx-x64/native/libCpuMathNative.dylib" Link="runtimes/osx-x64/native/libCpuMathNative.dylib" Pack="true" PackagePath="runtimes/osx-x64/native/libCpuMathNative.dylib" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(NuGetPackageFolderPath)/microsoft.ml.cpumath/0.9.0/runtimes/win-x64/native/CpuMathNative.dll" Link="runtimes/win-x64/native/CpuMathNative.dll" Pack="true" PackagePath="runtimes/win-x64/native/CpuMathNative.dll" />
+    <Content CopyToOutputDirectory="PreserveNewest" Include="$(NuGetPackageFolderPath)/microsoft.ml.cpumath/0.9.0/runtimes/win-x86/native/CpuMathNative.dll" Link="runtimes/win-x86/native/CpuMathNative.dll" Pack="true" PackagePath="runtimes/win-x86/native/CpuMathNative.dll" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.ML" Version="0.9.0" />
