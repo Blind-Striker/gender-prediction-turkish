@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace GenderPrediction.Train
+namespace GenderPrediction.Turkish.TestData
 {
     public static class Names
     {

@@ -18,6 +18,17 @@ Task("init")
     {
         if(IsRunningOnUnix())
         {
+            StartProcess("mono", new ProcessSettings {
+                Arguments = "--info"
+            });
+        }
+
+        StartProcess("dotnet", new ProcessSettings {
+            Arguments = "--info"
+        });
+
+        if(IsRunningOnUnix())
+        {
             InstallXUnitNugetPackage();
         }
     });
@@ -26,17 +37,17 @@ Task("compile")
     .Description("Builds all the projects in the solution")
     .Does(() =>
     {
-        StartProcess("dotnet", new ProcessSettings {
-            Arguments = "--info"
-        });
-
-        DotNetCoreBuildSettings settings = new DotNetCoreBuildSettings();
-        settings.Configuration = configuration;
-
         string slnPath = "./src/GenderPrediction.sln";
 
-        Information($"Building projects");
-        DotNetCoreBuild(slnPath, settings);
+        MSBuildSettings msBuildSettings = new MSBuildSettings();
+        msBuildSettings.Configuration = configuration;
+        msBuildSettings.Verbosity = Verbosity.Minimal;
+        msBuildSettings.Targets.Add("Clean");
+        msBuildSettings.Targets.Add("Build");
+        msBuildSettings.Restore = true;
+
+        Information($"Building {projectPath}");
+        MSBuild(slnPath, msBuildSettings);
     });
 
 Task("tests")
@@ -64,7 +75,7 @@ Task("tests")
 
                 if(IsRunningOnUnix() && targetFramework == "net461")
                 {
-                    RunXunitUsingMono(targetFramework, $"{testProj.DirectoryPath}/bin/{configuration}/{targetFramework}/linux-x64/{testProj.AssemblyName}.dll");
+                    RunXunitUsingMono(targetFramework, $"{testProj.DirectoryPath}/bin/{configuration}/{targetFramework}/{testProj.AssemblyName}.dll");
                 }
                 else
                 {

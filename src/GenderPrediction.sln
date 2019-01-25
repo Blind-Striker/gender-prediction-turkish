@@ -5,13 +5,17 @@ VisualStudioVersion = 15.0.28307.102
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{FD3AE64E-7BA0-4AF4-BA8E-E3C515C6C053}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox", "Tests\Sandbox\Sandbox.csproj", "{A6454B1D-25C6-4F34-B31B-A964B43C6605}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenderPrediction.Turkish", "GenderPrediction.Turkish\GenderPrediction.Turkish.csproj", "{1834D603-BAD0-4D36-B4CD-E072CE8C436C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenderPrediction.Trainer", "GenderPrediction.Trainer\GenderPrediction.Trainer.csproj", "{51EFBB46-679C-49C8-8CF4-A543F020F13E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenderPrediction.Turkish.Tests", "Tests\GenderPrediction.Turkish.Tests\GenderPrediction.Turkish.Tests.csproj", "{A44FE67E-DEAA-4364-AC8C-E63E259CEA50}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenderPrediction.Turkish.Tests", "Tests\GenderPrediction.Turkish.Tests\GenderPrediction.Turkish.Tests.csproj", "{A44FE67E-DEAA-4364-AC8C-E63E259CEA50}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sandbox", "Sandbox", "{35ADB247-2E5A-4882-9677-9E79EAF0E606}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GenderPrediction.Turkish.TestData", "Tests\Sandbox\GenderPrediction.Turkish.TestData\GenderPrediction.Turkish.TestData.csproj", "{6D3AAEE5-05A2-4ECD-A2BA-498A567161B3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sandbox.Core", "Tests\Sandbox\Sandbox.Core\Sandbox.Core.csproj", "{F1C54DB6-D042-43E7-847C-D1CF58EE4221}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,10 +23,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{A6454B1D-25C6-4F34-B31B-A964B43C6605}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A6454B1D-25C6-4F34-B31B-A964B43C6605}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A6454B1D-25C6-4F34-B31B-A964B43C6605}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A6454B1D-25C6-4F34-B31B-A964B43C6605}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1834D603-BAD0-4D36-B4CD-E072CE8C436C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1834D603-BAD0-4D36-B4CD-E072CE8C436C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1834D603-BAD0-4D36-B4CD-E072CE8C436C}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -35,13 +35,23 @@ Global
 		{A44FE67E-DEAA-4364-AC8C-E63E259CEA50}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A44FE67E-DEAA-4364-AC8C-E63E259CEA50}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A44FE67E-DEAA-4364-AC8C-E63E259CEA50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D3AAEE5-05A2-4ECD-A2BA-498A567161B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D3AAEE5-05A2-4ECD-A2BA-498A567161B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D3AAEE5-05A2-4ECD-A2BA-498A567161B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D3AAEE5-05A2-4ECD-A2BA-498A567161B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1C54DB6-D042-43E7-847C-D1CF58EE4221}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1C54DB6-D042-43E7-847C-D1CF58EE4221}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1C54DB6-D042-43E7-847C-D1CF58EE4221}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1C54DB6-D042-43E7-847C-D1CF58EE4221}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{A6454B1D-25C6-4F34-B31B-A964B43C6605} = {FD3AE64E-7BA0-4AF4-BA8E-E3C515C6C053}
 		{A44FE67E-DEAA-4364-AC8C-E63E259CEA50} = {FD3AE64E-7BA0-4AF4-BA8E-E3C515C6C053}
+		{35ADB247-2E5A-4882-9677-9E79EAF0E606} = {FD3AE64E-7BA0-4AF4-BA8E-E3C515C6C053}
+		{6D3AAEE5-05A2-4ECD-A2BA-498A567161B3} = {35ADB247-2E5A-4882-9677-9E79EAF0E606}
+		{F1C54DB6-D042-43E7-847C-D1CF58EE4221} = {35ADB247-2E5A-4882-9677-9E79EAF0E606}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {43A30CFB-848B-415D-95A6-8A8057BD2500}

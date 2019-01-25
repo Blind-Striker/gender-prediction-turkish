@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>netcoreapp2.2;netcoreapp2.1;netcoreapp2.0</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ConsoleTableExt" Version="2.0.2" />
+    <PackageReference Include="Microsoft.ML" Version="0.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\GenderPrediction.Turkish\GenderPrediction.Turkish.csproj" />
+    <ProjectReference Include="..\GenderPrediction.Turkish.TestData\GenderPrediction.Turkish.TestData.csproj" />
+  </ItemGroup>
+</Project>

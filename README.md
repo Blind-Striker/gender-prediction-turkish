@@ -74,7 +74,7 @@ ServiceProvider buildServiceProvider = services.BuildServiceProvider();
 var genderPredictionService = buildServiceProvider.GetRequiredService<IGenderPredictionService>();
 ```
 
-After library is initialized, it is very easy to use
+The singleton registration of the GenderPredictionEngine is important for performance, since its loads and initialize the trained model. After the library is initialized, it is very easy to use.
 
 ```csharp
 GenderPredictionModel model = genderPredictionService.Predict("Deniz");
